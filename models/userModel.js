@@ -1,41 +1,27 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-
-
-
-
-const userSchema = mongoose.Schema({
-
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
     },
-
-
     email: {
         type: String,
         required: true,
+        unique: true,
     },
-
-
     password: {
         type: String,
         required: true,
     },
-
-    type: {
+    userType: {
         type: String,
-        enum: ["buyer", "seller"],
+        enum: ['buyer', 'seller'],
         required: true,
     },
+});
 
-
-
-
-})
-
-
-const User = mongoose.model("User", userSchema, "ecommerceDB");
-
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

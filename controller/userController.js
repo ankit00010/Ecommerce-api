@@ -1,15 +1,15 @@
 const asyncHandler = require('express-async-handler');
-const User = require("../model/userModel");
+const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 
 
 const userRegister = asyncHandler(async (req, res) => {
-    const { username, email, password, type } = req.body; // Destructuring
+    const { username, email, password, userType } = req.body; // Destructuring
 
     // Validation: Check if any required field is missing
-    if (!username || !email || !password || !type) {
+    if (!username || !email || !password || !userType) {
         res.status(400);
         throw new Error("All fields are mandatory"); // Return a 400 response and throw an error
     }
@@ -31,7 +31,7 @@ const userRegister = asyncHandler(async (req, res) => {
     const newUser = await User.create({
         username,
         email,
-        type,
+        userType,
         password: hashedPassword,
     });
 

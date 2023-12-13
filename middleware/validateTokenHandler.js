@@ -1,6 +1,6 @@
+// Importing necessary modules
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
-
 const validateToken = asyncHandler(async (req, res, next) => {
     let token;
 
@@ -19,6 +19,7 @@ const validateToken = asyncHandler(async (req, res, next) => {
                     res.status(401);
                     return next(new Error("User is not authorized"));
                 }
+                console.log("Decoded user:", decoded.user);
                 req.user = decoded.user;
                 next();
             });

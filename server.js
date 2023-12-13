@@ -15,9 +15,9 @@ const port = 5000 || process.env.PORT;
 
 app.use(express.json());
 
-// app.use('/api/buyers', require('./routes/buyerRoutes'));
-// app.use('/api/sellers', require('./routes/sellerRoutes'));
-app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/buyer', require('./routes/buyerRoutes'));
+app.use('/api/sellers', require('./routes/sellerRoutes'));
+app.use('/api/auth', require('./routes/userRoutes'));
 app.use(errorHandler);
 app.listen(port, () => {
     console.log(`The server is running on port ${port}`);
