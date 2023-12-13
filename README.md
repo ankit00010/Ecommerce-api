@@ -70,10 +70,10 @@ The project structure is organized into:
 
 - `controller`: Contains controller functions for different routes.
 - `middleware`: Includes middleware functions such as token validation and error handling.
-- `config`: Holds configuration files, including the database connection.
+- `config`: Holds  the database connection.
 - `models`: Defines Mongoose models for the database schema.
 - `routes`: Specifies routes for different parts of the application.
-- `app.js`: Main entry point for the application.
+- `server.js`: Main entry point for the application.
 
 ## Endpoints
 
