@@ -1,23 +1,28 @@
-const asyncHandler = require('express-async-handler');
-const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 
+const asyncHandler = require('express-async-handler');     // Middleware for simplifying error handling in asynchronous route handlers.
+const User = require("../models/userModel");    //User Model
+const bcrypt = require("bcrypt");       // For password hashing 
+const jwt = require("jsonwebtoken");     // JWT for authorization
 
+
+// Endpoint: POST /api/auth/register
+// Two types: buyers and sellers
+// A user can sign up as a buyer or as a seller
+// REGISTER USER
 const userRegister = asyncHandler(async (req, res) => {
-    const { username, email, password, userType } = req.body; // Destructuring
+    const { username, email, password, userType } = req.body; // Destructuring it.
 
-    // Validation: Check if any required field is missing
+    // Validation: Checking that  if any required field is missing if it is then send the error of  400
     if (!username || !email || !password || !userType) {
         res.status(400);
-        throw new Error("All fields are mandatory"); // Return a 400 response and throw an error
+        throw new Error("All fields are mandatory"); // Returns a 400 response and throw an error
     }
 
-    // Check if the user with the given email already exists
+    // Check if the user with the given email already exists or not
     const userExists = await User.findOne({ email });
     if (userExists) {
-        // Check if the username is the same as an existing user's username
+        // comparing the email from the body and the database
         if (userExists.email === email) {
             res.status(400);
             throw new Error("Email already exists"); // Return a 400 response and throw an error
@@ -27,7 +32,7 @@ const userRegister = asyncHandler(async (req, res) => {
     // Hash the user's password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new user in the database
+    // Create a new user in the database user
     const newUser = await User.create({
         username,
         email,
@@ -35,7 +40,7 @@ const userRegister = asyncHandler(async (req, res) => {
         password: hashedPassword,
     });
 
-    // Check if the user was created successfully
+    // Checking if the user registerd successfully or not
     if (newUser) {
         res.status(201).json({
             message: "User registered Successfully",
@@ -49,20 +54,21 @@ const userRegister = asyncHandler(async (req, res) => {
 });
 
 
+// ___________________________________________________________________________________________________________//
 
-//@desc Login a user
-//@route POST /api/users/login
-//@access PUBLIC
+
+
+// Endpoint: POST /api/auth/login
+// LOGIN USER
 const userLogin = asyncHandler(async (req, res) => {
-    const { username, email, password } = req.body;
-    console.log(username + " and " + email + " and " + password);
+    const { username, email, password } = req.body;  //Destructuring the user
 
-    if ((!username && !email) || !password) {
+    if ((!username && !email) || !password) {   // Missing field check and to get the username or email  for login and password being mandatory
         res.status(400);
         throw new Error("Either username or email is required, and password is mandatory");
     }
 
-    let user;
+    let user;       //declaration of user to store  the email or the password based on req.body
 
     if (username) {
         user = await User.findOne({ username });
@@ -73,22 +79,22 @@ const userLogin = asyncHandler(async (req, res) => {
     // comparing the password and hashed password
     if (user && (await bcrypt.compare(password, user.password))) {
         const accessToken = jwt.sign({
-            user: {
+            user: {                             //payload
                 username: user.username,
                 email: user.email,
                 id: user.id,
             }
         },
-            process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "15m" }
+            process.env.ACCESS_TOKEN_SECRET,       //secret token
+            { expiresIn: "15m" }            // session timeout for 15minutes
         );
-        res.status(200).json({ accessToken });
+        res.status(200).json({ accessToken });      //getting access token as response
     } else {
         res.status(401);
-        throw new Error("Username, email, or password is not valid");
+        throw new Error("Username, email, or password is not valid");   // Validation error
     }
 });
 
 
 
-module.exports = { userLogin, userRegister };
+module.exports = { userLogin, userRegister }; //exported
