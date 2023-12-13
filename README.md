@@ -24,10 +24,11 @@ This API provides functionality for an e-commerce platform with separate routes 
 
 To run this project locally, follow these steps:
 
-1. Clone the repository:
+1. **Clone the repository:**
 
-```bash
-git clone [https://github.com/your-username/e-commerce-api.git](https://github.com/ankit00010/Ecommerce-api.git)
+   ```bash
+   git clone https://github.com/ankit00010/Ecommerce-api.git
+
 
 
 2.Install dependencies:
