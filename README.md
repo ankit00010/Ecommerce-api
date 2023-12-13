@@ -13,8 +13,7 @@ This is a simple E-Commerce API built using Node.js, Express, and MongoDB.
 - [Error Handling](#error-handling)
 - [Configuration](#configuration)
 - [Running the Application](#running-the-application)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Introduction
 
