@@ -30,8 +30,13 @@ To run this project locally, follow these steps:
 
 
 
-2.Install dependencies:
-  npm install
+2. **Install Dependencies:**
+
+   To install the required dependencies, run the following command:
+
+   ```bash
+   npm install
+
 
 3. **Set up your MongoDB connection:**
 
