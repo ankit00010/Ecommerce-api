@@ -34,44 +34,60 @@ To run this project locally, follow these steps:
 2.Install dependencies:
   npm install
 
-3.Set up your MongoDB connection by creating a .env file with your database connection string:
-MONGODB_URI=your_mongodb_connection_string
-ACCESS_TOKEN_SECRET=your_access_token_secret
-PORT=your_port
+3. **Set up your MongoDB connection:**
 
-4.Run the application:
-  npm run dev
-The server will run on the specified port (default is 5000).
+   Create a `.env` file in the root directory of the project and add the following information:
+
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   ACCESS_TOKEN_SECRET=your_access_token_secret
+   PORT=your_port
+
+4. **Run the application:**
+
+   Execute the following command to start the server:
+
+   ```bash
+   npm run dev
 
 
-Project Structure
+## Project Structure
+
 The project structure is organized into:
 
-controller: Contains controller functions for different routes.
-middleware: Includes middleware functions such as token validation and error handling.
-config: Holds configuration files, including database connection.
-models: Defines Mongoose models for database schema.
-routes: Specifies routes for different parts of the application.
-app.js: Main entry point for the application.
-Endpoints
-/api/buyer: Routes for buyers' logic.
-/api/sellers: Routes for sellers' logic.
-/api/auth: Routes for user authentication.
+- `controller`: Contains controller functions for different routes.
+- `middleware`: Includes middleware functions such as token validation and error handling.
+- `config`: Holds configuration files, including the database connection.
+- `models`: Defines Mongoose models for the database schema.
+- `routes`: Specifies routes for different parts of the application.
+- `app.js`: Main entry point for the application.
+
+## Endpoints
+
+- `/api/buyer`: Routes for buyers' logic.
+- `/api/sellers`: Routes for sellers' logic.
+- `/api/auth`: Routes for user authentication.
+
 Detailed information about each endpoint can be found in the respective route files.
 
-Middleware
-validateTokenHandler: Middleware to validate access tokens.
-Database
+## Middleware
+
+- `validateTokenHandler`: Middleware to validate access tokens.
+
+## Database
+
 The application uses MongoDB as the database. Mongoose is used for schema modeling and interaction with the database.
 
-Error Handling
-The application includes a custom error handling middleware (errorHandler) to handle various HTTP status codes.
+## Error Handling
 
-Configuration
-Configuration variables are stored in a .env file, including the MongoDB connection string and the access token secret.
+The application includes a custom error handling middleware (`errorHandler`) to handle various HTTP status codes.
 
+## Configuration
 
-Author ,
+Configuration variables are stored in a `.env` file, including the MongoDB connection string and the access token secret.
+
+## Author
+
 Ankit Mishra
 
 
