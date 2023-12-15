@@ -15,6 +15,10 @@ const port = 5000 || process.env.PORT;
 // Enable JSON parsing for incoming requests
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.json({ message: "Server is running" });
+});
+
 // Define routes for different parts of the application
 app.use('/api/buyer', require('./routes/buyerRoutes')); // Buyers logic
 app.use('/api/sellers', require('./routes/sellerRoutes')); // Sellers logic
